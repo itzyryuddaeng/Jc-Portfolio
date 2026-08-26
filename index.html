@@ -309,7 +309,6 @@
   /* ---------- ABOUT ---------- */
   .about { padding: 80px 0; background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .about .wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; }
-  .about-quote { font-size: 30px; color: var(--yellow-deep); }
   .about h2 { font-size: 34px; margin-bottom: 18px; }
   .about-photo {
     width: 100%;
@@ -350,11 +349,17 @@
     gap: 20px;
     align-items: center;
   }
-  .qr-box {
-    width: 100px; height: 100px; background: var(--white); border-radius: 12px;
+  .contact-socials { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+  .contact-socials a {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
     display: flex; align-items: center; justify-content: center;
-    color: #999; font-size: 10px; font-weight: 700; text-align: center; padding: 6px;
+    color: var(--white);
+    transition: background 0.2s ease, color 0.2s ease;
   }
+  .contact-socials a:hover { background: var(--yellow); color: var(--black); }
+  .contact-socials svg { width: 18px; height: 18px; }
   .contact-card h5 { font-size: 15px; margin-bottom: 8px; }
   .contact-card ul { font-size: 13px; display: flex; flex-direction: column; gap: 5px; color: #d8d8d8; }
 
@@ -400,34 +405,87 @@
     justify-content: center; font-size: 11px; font-weight: 800; color: var(--white);
   }
 
-  .work-layout { display: grid; grid-template-columns: 340px 1fr; gap: 34px; align-items: start; }
-
-  /* phone mockup holding the FB embed */
-  .phone {
-    background: var(--black);
-    border-radius: 34px;
-    padding: 12px;
-    box-shadow: 0 24px 50px rgba(0,0,0,0.18);
-  }
-  .phone-screen {
-    background: var(--white);
-    border-radius: 22px;
-    overflow: hidden;
-    min-height: 420px;
-  }
-  .embed-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--yellow-deep);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 10px 12px 0;
-  }
-  .fb-embed-frame { width: 100%; border: none; overflow: hidden; }
-
   .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .work-grid .todo-box { aspect-ratio: 4/5; }
   .work-grid .todo-box.wide { grid-column: span 2; aspect-ratio: auto; }
+
+  /* ---------- BRAND IDENTITY GRID ---------- */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 160px;
+    grid-auto-flow: dense;
+    gap: 16px;
+  }
+  .brand-item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+  .brand-item.tall { grid-row: span 2; }
+  .brand-item.wide { grid-column: span 2; }
+  .brand-item img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+  .brand-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 22px 14px 10px;
+    background: linear-gradient(180deg, transparent, rgba(15,20,18,0.78) 65%);
+    color: #fff;
+  }
+  .brand-caption strong { display: block; font-size: 12.5px; font-weight: 700; letter-spacing: 0.01em; }
+  .brand-caption span { display: block; font-size: 10.5px; font-weight: 500; opacity: 0.82; margin-top: 1px; }
+
+  /* ---------- IMAGE LIGHTBOX ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,14,12,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 40px;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+  }
+  .lightbox.open { opacity: 1; visibility: visible; }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.22); }
+  .lightbox-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 22px;
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 20px;
+  }
   .video-card { border-radius: 16px; overflow: hidden; aspect-ratio: 4/5; background: #000; }
 
   /* horizontally scrollable row of FB video embeds, side by side */
@@ -479,9 +537,8 @@
     .hero .wrap { grid-template-columns: 1fr; }
     .hero-photo-wrap { order: -1; }
     .about .wrap { grid-template-columns: 1fr; }
-    .toc-grid { grid-template-columns: 1fr; }
-    .work-layout { grid-template-columns: 1fr; }
     .work-grid { grid-template-columns: repeat(2, 1fr); }
+    .brand-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-top { grid-template-columns: 1fr; }
   }
 
@@ -509,8 +566,9 @@
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#work-smm">Social Media</a>
-      <a href="#work-pubmat">Pubmats</a>
+      <a href="#work-pubmat">Branding</a>
       <a href="#work-video">Video Editing</a>
+      <a href="#work-certification">Certification</a>
     </div>
     <a href="#contact" class="nav-cta">Let's Talk</a>
     <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -518,7 +576,8 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#about">About</a>
     <a href="#work-smm">Social Media</a>
-    <a href="#work-pubmat">Pubmats</a>
+    <a href="#work-pubmat">Branding</a>
+    <a href="#work-certification">Certification</a>
     <a href="#work-video">Video Editing</a>
     <a href="#contact">Contact</a>
   </div>
@@ -608,6 +667,26 @@
           <div class="worked-with-avatar"><img src="worked with logos/Killiney.jpg" alt="Killiney" /></div>
           <span>Killiney</span>
         </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/ABdevify.jpg" alt="ABDevify" /></div>
+          <span>ABDevify</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/Jon-Jon Ferrer.jpg" alt="Jon-Jon Ferrer" /></div>
+          <span>Jon-Jon Ferrer</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/Kanta mo, Kwento mo.jpg" alt="Kanta Mo, Kwento Mo" /></div>
+          <span>Kanta Mo, Kwento Mo</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/dilaw.jpg" alt="Dilaw" /></div>
+          <span>Dilaw</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/sugar cane.jpg" alt="Sugar Cane" /></div>
+          <span>Sugar Cane</span>
+        </div>
         <!-- set 2 (duplicate, for seamless loop) -->
         <div class="worked-with-item" aria-hidden="true">
           <div class="worked-with-avatar"><img src="worked with logos/syd hartha.jpg" alt="" /></div>
@@ -641,6 +720,26 @@
           <div class="worked-with-avatar"><img src="worked with logos/Killiney.jpg" alt="" /></div>
           <span>Killiney</span>
         </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/ABdevify.jpg" alt="" /></div>
+          <span>ABDevify</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/Jon-Jon Ferrer.jpg" alt="" /></div>
+          <span>Jon-Jon Ferrer</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/Kanta mo, Kwento mo.jpg" alt="" /></div>
+          <span>Kanta Mo, Kwento Mo</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/dilaw.jpg" alt="" /></div>
+          <span>Dilaw</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/sugar cane.jpg" alt="" /></div>
+          <span>Sugar Cane</span>
+        </div>
       </div>
     </div>
   </div>
@@ -655,9 +754,16 @@
       </div>
 
       <div class="contact-card">
-        <div class="qr-box">
-          <!-- EDIT: replace with a real QR code image linking to your portfolio/socials -->
-          QR CODE HERE
+        <div class="contact-socials">
+          <a href="https://www.facebook.com/jc.bautista.7370" target="_blank" rel="noopener" aria-label="Facebook profile">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/james-christian-bautista-511456292" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61584500200167" target="_blank" rel="noopener" aria-label="Facebook page">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+          </a>
         </div>
         <div>
           <h5>Let's work together</h5>
@@ -670,7 +776,6 @@
       </div>
     </div>
     <div>
-      <span class="about-quote">&#8220;</span>
       <h2 class="display">Hello.</h2>
       <p class="about-bio">
         I'm <strong>James Christian Bautista</strong>, known online as <strong>JCVRSE</strong> —
@@ -727,8 +832,7 @@
       <p>
         I've run targeted Facebook and Instagram campaigns for a tech
         startup, designed the graphics behind them, and managed the content
-        calendar end-to-end. Below is a live embed of an actual post,
-        pulled straight from Facebook.
+        calendar end-to-end.
       </p>
       <div class="badge-row">
         <div class="app-badge" style="background:#2790ce">Ps</div>
@@ -737,56 +841,40 @@
       </div>
     </div>
 
-    <div class="work-layout reveal">
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="embed-label">Demo embed — replace this href with your post link</div>
-          <!--
-            EDIT: This is a real, working Facebook Post embed (iframe-based,
-            no SDK/app id required). Replace the href= value (URL-encoded)
-            with your own public Facebook post link. It only renders once
-            this file is hosted on a real domain — Facebook blocks embeds
-            opened as a local file.
-
-            To build your own href:
-            https://www.facebook.com/plugins/post.php?href=YOUR_ENCODED_POST_URL&show_text=true&width=340
-          -->
-          <iframe
-            class="fb-embed-frame"
-            src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fposts%2F10153231379946729&show_text=true&width=340"
-            width="100%"
-            height="480"
-            style="border:none;overflow:hidden"
-            scrolling="no"
-            frameborder="0"
-            allowfullscreen="true"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          ></iframe>
-        </div>
-      </div>
-
+    <div class="reveal">
       <div>
-        <div class="work-grid">
-          <!-- EDIT: replace each box with <img src="your-graphic.jpg"> -->
-          <div class="todo-box wide">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
-            ADD IMAGE<span class="sub">feed post design</span>
+        <div class="brand-grid">
+          <div class="brand-item tall">
+            <img src="pubmats/Dashley Debut main.png" alt="Dashley's debut invitation design" />
+            <div class="brand-caption"><strong>Dashley's Debut</strong><span>Event Invitation Design</span></div>
           </div>
-          <div class="todo-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2"/></svg>
-            ADD IMAGE<span class="sub">story design</span>
+          <div class="brand-item">
+            <img src="pubmats/Screenshot 2026-08-26 120650.png" alt="ABDevify Facebook feed post, website features" />
+            <div class="brand-caption"><strong>ABDevify</strong><span>Feed Post — Website Features</span></div>
           </div>
-          <div class="todo-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
-            ADD IMAGE
+          <div class="brand-item">
+            <img src="pubmats/Screenshot 2026-08-26 120750.png" alt="ABDevify Facebook feed post, one-pager website" />
+            <div class="brand-caption"><strong>ABDevify</strong><span>Feed Post — One-Pager Website</span></div>
           </div>
-          <div class="todo-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
-            ADD IMAGE
+          <div class="brand-item">
+            <img src="pubmats/image (1).png" alt="Math in Nature editorial poster" />
+            <div class="brand-caption"><strong>Math in Nature</strong><span>Editorial Poster Design</span></div>
           </div>
-          <div class="todo-box wide">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
-            ADD IMAGE<span class="sub">event promo</span>
+          <div class="brand-item wide">
+            <img src="pubmats/image (7).png" alt="ABDevify Facebook feed post, carbon footprint" />
+            <div class="brand-caption"><strong>ABDevify</strong><span>Feed Post — Carbon Footprint</span></div>
+          </div>
+          <div class="brand-item">
+            <img src="pubmats/image (2).png" alt="Humans vs A.I. editorial poster" />
+            <div class="brand-caption"><strong>Humans vs A.I.</strong><span>Editorial Poster Design</span></div>
+          </div>
+          <div class="brand-item">
+            <img src="pubmats/image (9).png" alt="So Many Colors and Shapes lyric poster" />
+            <div class="brand-caption"><strong>So Many Colors &amp; Shapes</strong><span>Lyric Poster Design</span></div>
+          </div>
+          <div class="brand-item">
+            <img src="pubmats/image.png" alt="Diyos, Puso collage poster" />
+            <div class="brand-caption"><strong>Diyos, Puso</strong><span>Collage Poster Design</span></div>
           </div>
         </div>
         <div class="hash-row">#instagramfeed &nbsp;#socialmedia &nbsp;#contentcreation</div>
@@ -799,13 +887,12 @@
 <section class="work-section" id="work-pubmat">
   <div class="wrap">
     <div class="work-head reveal">
-      <div class="eyebrow">02 · Pubmat &amp; Print Design</div>
-      <h2 class="display">Pubmats &amp; Print Materials</h2>
+      <div class="eyebrow">02 · Brand Identity Design</div>
+      <h2 class="display">Brand Identity &amp; Visual Design</h2>
       <p>
-        <!-- EDIT: your description -->
-        Event promos, product pubmats, brochures, IDs, banners, and merch —
-        designed to keep a brand consistent across every printed and digital
-        touchpoint.
+        From logo marks and color systems to packaging, product mockups, and
+        campaign posters — I build out complete brand identities that stay
+        consistent across every touchpoint, print or digital.
       </p>
       <div class="badge-row">
         <div class="app-badge" style="background:#2790ce">Ps</div>
@@ -813,34 +900,45 @@
       </div>
     </div>
 
-    <div class="work-grid reveal" style="grid-template-columns:repeat(4,1fr)">
-      <!-- EDIT: replace each box with <img src="your-pubmat.jpg"> -->
-      <div class="todo-box wide" style="grid-column:span 2;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
-        ADD IMAGE<span class="sub">event promo poster</span>
+    <div class="brand-grid reveal">
+      <div class="brand-item tall">
+        <img src="branding/eco quench.jpg" alt="EcoQuench campaign poster and product mockup" />
+        <div class="brand-caption"><strong>EcoQuench</strong><span>Campaign Poster &amp; Product Mockup</span></div>
       </div>
-      <div class="todo-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="2"/></svg>
-        ADD IMAGE<span class="sub">ID card</span>
+      <div class="brand-item">
+        <img src="branding/MARS ISNT AN OPTION FINAL FRONT.png" alt="Save Earth streetwear graphic, front" />
+        <div class="brand-caption"><strong>Save Earth</strong><span>Streetwear Graphic — Front</span></div>
       </div>
-      <div class="todo-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
-        ADD IMAGE<span class="sub">brochure</span>
+      <div class="brand-item">
+        <img src="branding/back.png" alt="Save Earth streetwear graphic, back" />
+        <div class="brand-caption"><strong>Save Earth</strong><span>Streetwear Graphic — Back</span></div>
       </div>
-      <div class="todo-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7z"/></svg>
-        ADD IMAGE<span class="sub">product promo</span>
+      <div class="brand-item">
+        <img src="branding/PURRFECT TOTE LOGO.png" alt="Purrfect Tote logo mark" />
+        <div class="brand-caption"><strong>Purrfect Tote</strong><span>Logo Mark</span></div>
       </div>
-      <div class="todo-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h12l-1.5 18h-9z"/></svg>
-        ADD IMAGE<span class="sub">t-shirt merch</span>
+      <div class="brand-item wide">
+        <img src="branding/PURRFECT TOTE PACKAGING.png" alt="Purrfect Tote packaging mockup" />
+        <div class="brand-caption"><strong>Purrfect Tote</strong><span>Packaging Mockup</span></div>
       </div>
-      <div class="todo-box wide" style="grid-column:span 2;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
-        ADD IMAGE<span class="sub">standing banner</span>
+      <div class="brand-item">
+        <img src="branding/Purrfect Tote - 3.png" alt="Purrfect Tote brand tile" />
+        <div class="brand-caption"><strong>Purrfect Tote</strong><span>Brand Tile</span></div>
+      </div>
+      <div class="brand-item">
+        <img src="branding/007-gravity-jewelry-paper-bag-mockup-psd-brand_800x.png" alt="Purrfect Tote retail bag mockup" />
+        <div class="brand-caption"><strong>Purrfect Tote</strong><span>Retail Bag Mockup</span></div>
+      </div>
+      <div class="brand-item">
+        <img src="branding/moeny mind LOGO.png" alt="Money Mind Stories podcast logo" />
+        <div class="brand-caption"><strong>Money Mind Stories</strong><span>Podcast Logo</span></div>
+      </div>
+      <div class="brand-item wide">
+        <img src="branding/image (8).png" alt="JUST logo color system" />
+        <div class="brand-caption"><strong>JUST</strong><span>Logo &amp; Color System</span></div>
       </div>
     </div>
-    <div class="hash-row">#printdesign &nbsp;#pubmat &nbsp;#eventpromo</div>
+    <div class="hash-row">#brandidentity &nbsp;#logodesign &nbsp;#packaging &nbsp;#productmockup</div>
   </div>
 </section>
 
@@ -869,22 +967,6 @@
     <div class="video-scroll-row reveal">
       <div class="video-card-scroll">
         <iframe
-          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1044478207644862&show_text=false&width=260"
-          width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
-          frameborder="0" allowfullscreen="true"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        ></iframe>
-      </div>
-      <div class="video-card-scroll">
-        <iframe
-          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F747356397728373&show_text=false&width=260"
-          width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
-          frameborder="0" allowfullscreen="true"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        ></iframe>
-      </div>
-      <div class="video-card-scroll">
-        <iframe
           src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F4580332808866097&show_text=false&width=260"
           width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
           frameborder="0" allowfullscreen="true"
@@ -893,7 +975,47 @@
       </div>
       <div class="video-card-scroll">
         <iframe
-          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F3880168558783048&show_text=false&width=260"
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2749767495420998&show_text=false&width=260"
+          width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
+          frameborder="0" allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+      </div>
+      <div class="video-card-scroll">
+        <iframe
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1578593943295939&show_text=false&width=260"
+          width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
+          frameborder="0" allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+      </div>
+      <div class="video-card-scroll">
+        <iframe
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1229641748977815&show_text=false&width=260"
+          width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
+          frameborder="0" allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+      </div>
+      <div class="video-card-scroll">
+        <iframe
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F898756769481995&show_text=false&width=260"
+          width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
+          frameborder="0" allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+      </div>
+      <div class="video-card-scroll">
+        <iframe
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2351347935052335&show_text=false&width=260"
+          width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
+          frameborder="0" allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        ></iframe>
+      </div>
+      <div class="video-card-scroll">
+        <iframe
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F269413729343462&show_text=false&width=260"
           width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no"
           frameborder="0" allowfullscreen="true"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -901,6 +1023,50 @@
       </div>
     </div>
     <div class="hash-row reveal">#videoediting &nbsp;#reels &nbsp;#contentcreation</div>
+  </div>
+</section>
+
+<!-- ================= CERTIFICATION ================= -->
+<section class="work-section" id="work-certification">
+  <div class="wrap">
+    <div class="work-head reveal">
+      <div class="eyebrow">04 · Certification</div>
+      <h2 class="display">Work Immersion Certification</h2>
+      <p>
+        During senior high school, I completed a Work Immersion Program
+        simulating a real office environment — <strong>Skill Sandbox</strong>,
+        a joint initiative by St. Edward School and the Center for Social
+        Innovation Foundation. As the program's Social Media Manager, I
+        created digital assets and branding materials for our trainees, and
+        our final project was building a full logo and brand identity for
+        the program itself — an early, hands-on lesson in professional
+        branding and teamwork.
+      </p>
+    </div>
+
+    <div class="brand-grid reveal">
+      <div class="brand-item wide">
+        <img src="skillsandbox/Skill Sandbox Pubmats - 1.png" alt="Skill Sandbox team and program poster" />
+        <div class="brand-caption"><strong>Skill Sandbox</strong><span>Team &amp; Program Poster</span></div>
+      </div>
+      <div class="brand-item">
+        <img src="skillsandbox/Skill Sandbox Pubmats - 3.png" alt="Skill Sandbox brand reveal poster" />
+        <div class="brand-caption"><strong>Skill Sandbox</strong><span>Brand Reveal Poster</span></div>
+      </div>
+      <div class="brand-item">
+        <img src="skillsandbox/Skill Sandbox Pubmats - 4.png" alt="Skill Sandbox logo mark" />
+        <div class="brand-caption"><strong>Skill Sandbox</strong><span>Logo Mark</span></div>
+      </div>
+      <div class="brand-item">
+        <img src="skillsandbox/Skill Sandbox Pubmats - 2.png" alt="Skill Sandbox courses pubmat" />
+        <div class="brand-caption"><strong>Skill Sandbox</strong><span>Courses Pubmat</span></div>
+      </div>
+      <div class="brand-item">
+        <img src="skillsandbox/playlist cover.png" alt="Skill Sandbox playlist cover art" />
+        <div class="brand-caption"><strong>Skill Sandbox</strong><span>Playlist Cover Art</span></div>
+      </div>
+    </div>
+    <div class="hash-row">#workimmersion &nbsp;#skillsandbox &nbsp;#brandidentity</div>
   </div>
 </section>
 
@@ -917,9 +1083,16 @@
         </p>
       </div>
       <div class="footer-card">
-        <div class="footer-qr">
-          <!-- EDIT: replace with a real QR code image -->
-          QR CODE
+        <div class="contact-socials">
+          <a href="https://www.facebook.com/jc.bautista.7370" target="_blank" rel="noopener" aria-label="Facebook profile">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/james-christian-bautista-511456292" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61584500200167" target="_blank" rel="noopener" aria-label="Facebook page">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+          </a>
         </div>
         <div class="footer-links">
           <a href="mailto:jcbautista0427@gmail.com">jcbautista0427@gmail.com</a>
@@ -934,6 +1107,12 @@
     </div>
   </div>
 </footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <img id="lightboxImg" src="" alt="" />
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
 
 <script>
   // mobile menu toggle
@@ -989,6 +1168,31 @@
     track.addEventListener('pointerup', endDrag);
     track.addEventListener('pointercancel', endDrag);
     track.addEventListener('pointerleave', endDrag);
+  })();
+
+  // image lightbox: click a work-grid photo to view it full size, uncropped
+  (function () {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.brand-item img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.currentSrc || img.src;
+        lightboxImg.alt = img.alt;
+        const captionEl = img.closest('.brand-item').querySelector('.brand-caption');
+        const strong = captionEl && captionEl.querySelector('strong');
+        const span = captionEl && captionEl.querySelector('span');
+        lightboxCaption.textContent = strong && span ? `${strong.textContent} — ${span.textContent}` : img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+
+    function closeLightbox() { lightbox.classList.remove('open'); }
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
   })();
 </script>
 
