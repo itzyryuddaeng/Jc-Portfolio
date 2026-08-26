@@ -264,6 +264,48 @@
   .doodle.d2 { top: 40%; left: 2%; width: 34px; height: 34px; }
   .doodle.d3 { bottom: 8%; right: 42%; width: 30px; height: 30px; }
 
+  /* ---------- WORKED WITH ---------- */
+  .worked-with { padding: 56px 0 64px; background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .worked-with-head { text-align: center; margin-bottom: 38px; }
+  .worked-with-head h3 {
+    font-size: clamp(20px, 2.6vw, 27px);
+    font-weight: 700;
+    color: var(--ink);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.35;
+  }
+  .worked-with-marquee {
+    overflow: hidden;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .worked-with-track {
+    display: flex;
+    align-items: flex-start;
+    width: max-content;
+    gap: 44px;
+    will-change: transform;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+  }
+  .worked-with-track.dragging { cursor: grabbing; }
+  .worked-with-item { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 96px; flex-shrink: 0; }
+  .worked-with-avatar img { -webkit-user-drag: none; pointer-events: none; }
+  .worked-with-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--paper);
+    border: 2px solid var(--line);
+    flex-shrink: 0;
+  }
+  .worked-with-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .worked-with-item span { font-size: 12.5px; font-weight: 600; text-align: center; color: var(--gray); }
+
   /* ---------- ABOUT ---------- */
   .about { padding: 80px 0; background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .about .wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; }
@@ -279,6 +321,7 @@
   }
   /* EDIT: replace with your headshot */
   .about-photo .todo-box { width: 100%; height: 100%; border-radius: 14px; }
+  .about .wrap > div:first-child .contact-card { margin-top: 26px; }
 
   .about-bio { font-size: 15.5px; color: #4a4a4a; line-height: 1.75; margin-bottom: 34px; }
   .about-bio strong { color: var(--ink); }
@@ -523,12 +566,107 @@
   </div>
 </section>
 
+<!-- ================= WORKED WITH ================= -->
+<section class="worked-with">
+  <div class="wrap">
+    <div class="worked-with-head">
+      <div class="eyebrow">Collaborations</div>
+      <h3 class="display">Talents &amp; brands I've had the pleasure of working with.</h3>
+    </div>
+    <div class="worked-with-marquee" id="workedWithMarquee">
+      <div class="worked-with-track" id="workedWithTrack">
+        <!-- set 1 -->
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/syd hartha.jpg" alt="Syd Hartha" /></div>
+          <span>Syd Hartha</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/toneejay.jpg" alt="Toneejay" /></div>
+          <span>Toneejay</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/cup of joe.jpg" alt="Cup of Joe" /></div>
+          <span>Cup of Joe</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/Model Prodigy Circle.jpg" alt="Model Prodigy Circle" /></div>
+          <span>Model Prodigy Circle</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/eight cup.jpg" alt="Eight Cup" /></div>
+          <span>Eight Cup</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/carl arcusa.jpg" alt="Carl Arcusa" /></div>
+          <span>Carl Arcusa</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/muni-muni.jpg" alt="Muni-Muni" /></div>
+          <span>Muni-Muni</span>
+        </div>
+        <div class="worked-with-item">
+          <div class="worked-with-avatar"><img src="worked with logos/Killiney.jpg" alt="Killiney" /></div>
+          <span>Killiney</span>
+        </div>
+        <!-- set 2 (duplicate, for seamless loop) -->
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/syd hartha.jpg" alt="" /></div>
+          <span>Syd Hartha</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/toneejay.jpg" alt="" /></div>
+          <span>Toneejay</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/cup of joe.jpg" alt="" /></div>
+          <span>Cup of Joe</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/Model Prodigy Circle.jpg" alt="" /></div>
+          <span>Model Prodigy Circle</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/eight cup.jpg" alt="" /></div>
+          <span>Eight Cup</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/carl arcusa.jpg" alt="" /></div>
+          <span>Carl Arcusa</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/muni-muni.jpg" alt="" /></div>
+          <span>Muni-Muni</span>
+        </div>
+        <div class="worked-with-item" aria-hidden="true">
+          <div class="worked-with-avatar"><img src="worked with logos/Killiney.jpg" alt="" /></div>
+          <span>Killiney</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= ABOUT ================= -->
 <section class="about" id="about">
   <div class="wrap">
     <div>
       <div class="about-photo">
         <img src="images/about-photo.jpg" alt="JCVRSE portrait" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;" />
+      </div>
+
+      <div class="contact-card">
+        <div class="qr-box">
+          <!-- EDIT: replace with a real QR code image linking to your portfolio/socials -->
+          QR CODE HERE
+        </div>
+        <div>
+          <h5>Let's work together</h5>
+          <ul>
+            <li>jcbautista0427@gmail.com</li>
+            <li>0915-653-6660</li>
+            <li>General Trias, Cavite</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div>
@@ -576,48 +714,6 @@
           </div>
         </div>
       </div>
-
-      <div class="contact-card">
-        <div class="qr-box">
-          <!-- EDIT: replace with a real QR code image linking to your portfolio/socials -->
-          QR CODE HERE
-        </div>
-        <div>
-          <h5>Let's work together</h5>
-          <ul>
-            <li>jcbautista0427@gmail.com</li>
-            <li>0915-653-6660</li>
-            <li>General Trias, Cavite</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= TABLE OF CONTENT ================= -->
-<section class="toc">
-  <div class="wrap">
-    <div class="toc-heading display">Table <span class="fill">of</span> Content.</div>
-    <div class="toc-grid">
-      <a class="toc-card" href="#work-pubmat">
-        <div class="toc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
-        </div>
-        <span>Pubmat &amp;<br />Graphic Design</span>
-      </a>
-      <a class="toc-card" href="#work-smm">
-        <div class="toc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2"/><path d="M21 3v6h-6"/></svg>
-        </div>
-        <span>Social Media<br />Management</span>
-      </a>
-      <a class="toc-card" href="#work-video">
-        <div class="toc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--black)" stroke-width="1.8"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>
-        </div>
-        <span>Video<br />Editing</span>
-      </a>
     </div>
   </div>
 </section>
@@ -846,6 +942,54 @@
   burger.addEventListener('click', () => menu.classList.toggle('open'));
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
 
+  // "worked with" logo marquee: drag follows the cursor, release and it keeps auto-scrolling
+  (function () {
+    const track = document.getElementById('workedWithTrack');
+    const speed = 0.6; // px per frame, auto-scroll right-to-left
+    let offset = 0;
+    let halfWidth = track.scrollWidth / 2;
+    let dragging = false;
+    let startX = 0;
+    let startOffset = 0;
+
+    function wrap() {
+      if (halfWidth <= 0) return;
+      while (offset <= -halfWidth) offset += halfWidth;
+      while (offset > 0) offset -= halfWidth;
+    }
+
+    function tick() {
+      if (!dragging) {
+        offset -= speed;
+        wrap();
+      }
+      track.style.transform = `translateX(${offset}px)`;
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    window.addEventListener('resize', () => { halfWidth = track.scrollWidth / 2; });
+
+    track.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      startX = e.clientX;
+      startOffset = offset;
+      track.classList.add('dragging');
+      track.setPointerCapture(e.pointerId);
+    });
+    track.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      offset = startOffset + (e.clientX - startX);
+      wrap();
+    });
+    function endDrag() {
+      dragging = false;
+      track.classList.remove('dragging');
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('pointerleave', endDrag);
+  })();
 </script>
 
 </body>
